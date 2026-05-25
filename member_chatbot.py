@@ -12,11 +12,7 @@ import subprocess
 
 
 
-# Auto-build vector DB if not present (needed for cloud deployment)
-if not os.path.exists("./db"):
-    logger.info("Vector database not found — building now...")
-    subprocess.run(["python", "ingest.py"], check=True)
-    logger.info("Vector database built successfully")
+
 
 load_dotenv()
 
@@ -32,6 +28,12 @@ logging.basicConfig(
     ]
 )
 logger = logging.getLogger(__name__)
+
+# Auto-build vector DB if not present (needed for cloud deployment)
+if not os.path.exists("./db"):
+    logger.info("Vector database not found — building now...")
+    subprocess.run(["python", "ingest.py"], check=True)
+    logger.info("Vector database built successfully")
 
 # ══════════════════════════════════════════════════════
 # LOAD TOOLS
