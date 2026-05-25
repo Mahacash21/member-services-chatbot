@@ -11,7 +11,13 @@ import os
 import subprocess
 
 
-
+# Load API key from Streamlit secrets into environment
+try:
+    import streamlit as st
+    if "OPENAI_API_KEY" in st.secrets:
+        os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
+except Exception:
+    pass  # Running locally — dotenv handles it
 
 
 load_dotenv()
