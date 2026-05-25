@@ -7,6 +7,16 @@ from langchain_community.vectorstores import FAISS
 from langchain_openai import OpenAIEmbeddings, ChatOpenAI
 from langchain_core.messages import HumanMessage
 from dotenv import load_dotenv
+import os
+import subprocess
+
+
+
+# Auto-build vector DB if not present (needed for cloud deployment)
+if not os.path.exists("./db"):
+    logger.info("Vector database not found — building now...")
+    subprocess.run(["python", "ingest.py"], check=True)
+    logger.info("Vector database built successfully")
 
 load_dotenv()
 
